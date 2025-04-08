@@ -16,3 +16,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 
 # Create your views here.
+class HRDashboard(View):
+    def get(self, reqest):
+        pass
+
+    def post(self, request):
+        pass
+
+class DeptSetup(View):
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass
