@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container">
+  <div class="page-inner">
+    <div class="page-header">
+      <h3 class="fw-bold mb-3">Employee</h3>
+      <ul class="breadcrumbs mb-3">
+        <li class="nav-home">
+          <a href="#">
+            <i class="icon-home"></i>
+          </a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="#">Tables</a>
+        </li>
+        <li class="separator">
+          <i class="icon-arrow-right"></i>
+        </li>
+        <li class="nav-item">
+          <a href="#">Datatables</a>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+
+
+      <div class="d-flex flex-column justify-content-center col-md-5 mb-3 card">
+        <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-header"><h4 class="card-title">Add Employee</h4></div>
+        <div class="card-body">{{fm.as_p}}</div>
+        <div class="card-footer d-flex justify-content-between">
+          <button type="submit" class="btn btn-success">Save Employee</button>
+          <!-- <a href="#" class="btn btn-danger">Cancel</a> -->
+        </div>
+       </form>
+  
+        
+      </div>
+      <div class="col-md-7">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Employee List</h4>
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="dept-tbl" class="display table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <!-- <th>No. </th> -->
+                    <th>Emplyee ID</th>
+                    <th>Employee Name</th>
+                    <th>view</th>
+
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    
+                    <th>Emplyee ID</th>
+                    <th>Employee Name</th>
+                    <th>view</th>
+
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {% for i in emp %}
+
+                  <tr>
+                    
+                    <td>{{i.employee_id}}</td>
+                    <td>{{i.employee_name}}</td>
+                    <td><a href="#" ><h4><i class="fas fa-address-card"></i></h4></a></td>
+
+                  </tr>
+                  {% endfor %}
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+     
+
+
+      
+
+
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

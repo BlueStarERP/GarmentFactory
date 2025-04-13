@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Department Setup{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="page-inner">
+      <div class="page-header">
+        <h3 class="fw-bold mb-3">Department</h3>
+        <ul class="breadcrumbs mb-3">
+          <li class="nav-home">
+            <a href="#">
+              <i class="icon-home"></i>
+            </a>
+          </li>
+          <li class="separator">
+            <i class="icon-arrow-right"></i>
+          </li>
+          <li class="nav-item">
+            <a href="#">Tables</a>
+          </li>
+          <li class="separator">
+            <i class="icon-arrow-right"></i>
+          </li>
+          <li class="nav-item">
+            <a href="#">Datatables</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+       
+
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <!-- <h4 class="card-title">Multi Filter Select</h4> -->
+              <div class="input-group mb-3 w-25 NewDptFm" id='NewDptiD'>
+                <input type="text" name="newDetp" class="form-control newDetp" placeholder="Enter Department" aria-label="newDept" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-success newDetpBtn" type="button">Add</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table
+                  id="dept-tbl"
+                  class="display table table-striped table-hover"
+                >
+                  <thead>
+                    <tr>
+                        <th>No. </th>
+                      <th>Department Name</th>
+                      <!-- <th>Description</th> -->
+                      
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                        <th>No.</th>
+                      <th>Department Name</th>
+                      <!-- <th>Description</th> -->
+                      
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    {% for i in dept %}
+
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                      <td>{{i.name}}</td>
+                      <!-- <td>{{i.description}}</td> -->
+                      
+                    </tr>
+                    {% endfor %}
+                    
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+{% endblock content %}

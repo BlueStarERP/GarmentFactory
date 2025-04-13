@@ -104,56 +104,27 @@
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#base">
                   <i class="fas fa-layer-group"></i>
-                  <p>Base</p>
+                  <p>HR</p>
                   <span class="caret"></span>
                 </a>
                 <div class="collapse" id="base">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="#">
-                        <span class="sub-item">Avatars</span>
+                      <a href="{% url 'DeptSetup' %}">
+                        <span class="sub-item">Department</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
-                        <span class="sub-item">Buttons</span>
+                      <a href="{% url 'EmpSetup' %}">
+                        <span class="sub-item">Shift</span>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
-                        <span class="sub-item">Grid System</span>
+                      <a href="{% url 'EmpSetup' %}">
+                        <span class="sub-item">EmpSetup</span>
                       </a>
                     </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Panels</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Notifications</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Sweet Alert</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Font Awesome Icons</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Simple Line Icons</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Typography</span>
-                      </a>
-                    </li>
+                    
                   </ul>
                 </div>
               </li>
@@ -711,7 +682,7 @@
           <!-- End Navbar -->
         </div>
 
-        <div class="container">
+        <!-- <div class="container">
           <div class="page-inner">
             <div class="page-header">
               <h4 class="page-title">Dashboard</h4>
@@ -736,10 +707,13 @@
               </ul>
             </div>
             <div class="page-category">Inner page content goes here</div>
+
           </div>
-        </div>
+        </div> -->
+
         {% block content %}
         {% endblock content %}
+        
 
         <footer class="footer">
           <div class="container-fluid d-flex justify-content-between">
@@ -805,5 +779,41 @@
 
     <!-- Kaiadmin JS -->
     <script src="{% static 'assets/js/kaiadmin.min.js' %}"></script>
+    <script src="{% static 'assets/js/abc.js' %}"></script>
+    <script>
+       $(document).ready(function () {
+      // new Dept Btn 
+$("#NewDptiD").on('click', '.newDetpBtn', function() {
+  var currenttr = $(this).closest(".NewDptFm");
+  var detp = currenttr.find(".newDetp").val();
+  // console.log('New Dept Btn clicked', detp);
+  $.ajax({
+    url: "{% url 'DeptSetup' %}",
+    method: "POST",
+    data:{detp:detp, csrfmiddlewaretoken: '{{ csrf_token }}'},
+    success: function(response){
+
+        alert(response.messages);
+        window.setTimeout(function(){ } ,2000);
+                        location.reload();
+
+        // window.location.href = '/admin/';
+        // window.open('https://www.codexworld.com', '_blank');
+    },
+    error:function(){
+        alert('having some error contact to developer');
+    },
+                    
+  });//end ajax
+}); // Add New Dept
+
+
+
+
+
+
+
+       });//end ready functin
+    </script>
   </body>
 </html>

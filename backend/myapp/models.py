@@ -12,6 +12,8 @@ class Department(models.Model):
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True)
+    employee_id = models.CharField(max_length=100, unique=True, blank=True, null=True)
+    employee_name = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     gender = models.CharField(max_length=20, choices=[
         ('male', 'Male'),
@@ -66,3 +68,22 @@ class LeaveRequest(models.Model):
     
     def __str__(self):
         return f"{self.employee} - {self.start_date} to {self.end_date}"
+    
+
+class ShiftGroup(models.Model):
+    name = models.CharField(max_length=100)
+    working_hours = models.FloatField(default=0.0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.name
+
+class Shift(models.Model):
+    shift_group = models.ForeignKey(ShiftGroup, on_delete=models.CASCADE)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    working_hours = models.FloatField(default=0.0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.start_time} - {self.end_time}"
