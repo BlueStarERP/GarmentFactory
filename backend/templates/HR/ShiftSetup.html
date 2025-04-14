@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container">
+    <div class="page-inner">
+      <div class="page-header">
+        <h3 class="fw-bold mb-3">Department</h3>
+        <ul class="breadcrumbs mb-3">
+          <li class="nav-home">
+            <a href="#">
+              <i class="icon-home"></i>
+            </a>
+          </li>
+          <li class="separator">
+            <i class="icon-arrow-right"></i>
+          </li>
+          <li class="nav-item">
+            <a href="#">Tables</a>
+          </li>
+          <li class="separator">
+            <i class="icon-arrow-right"></i>
+          </li>
+          <li class="nav-item">
+            <a href="#">Datatables</a>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+       
+
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <!-- <h4 class="card-title">Multi Filter Select</h4> -->
+              <button
+                        class="btn btn-primary btn-round ms-auto"
+                        data-bs-toggle="modal" data-bs-target="#addGruopModal"
+                        
+                      >
+                        <i class="fa fa-plus"></i>
+                        Add Group
+                      </button>
+
+                      <button
+                        class="btn btn-success btn-round ms-auto"
+                        data-bs-toggle="modal" data-bs-target="#addShiftModal"
+                        
+                      >
+                        <i class="fa fa-plus"></i>
+                        Add Shift
+                      </button>
+                        
+                         <!-- Modal -->
+<div class="modal fade" id="addGruopModal" tabindex="-1" aria-labelledby="addGruopModalLabel" aria-hidden="true">
+    <div class="modal-dialog" id="groupmdl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addGruopModalLabel">Add Gruop</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body GruopModalBody">
+          <div class="form-group">
+            <label for="gpname" class="form-label">Group Name</label>
+            <input type="text" class="form-control" name="gpname" id="gpname" placeholder="Group Name">
+          </div>
+          <div class="form-group">
+            <label for="whour" class="form-label">Working Hours</label>
+            <input type="number" class="form-control" name="whour" id="whour" placeholder="Working Hours">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary saveGroupBtn">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+<div class="modal fade" id="addShiftModal" tabindex="-1" aria-labelledby="addShiftModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+<form action="" method="" id="addShiftForm">
+        <!-- {% csrf_token %} -->
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="addShiftModalLabel">Add Shift</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="shiftModalBody">
+          {{fm}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">Save changes</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+                    
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table
+                  id="dept-tbl"
+                  class="display table table-striped table-hover"
+                >
+                  <thead>
+                    <tr>
+                        <th>Group</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Working Hour</th>
+                        <th>Action</th>
+                      
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                        <th>Group</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
+                      <th>Working Hour</th>
+                      <th>Action</th>
+                      
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    {% for i in sh %}
+
+                    <tr>
+                        <td>{{i.shift_group}}</td>
+                      <td>{{i.start_time}}</td>
+                      <td>{{i.end_time}}</td>
+                      <td>{{i.working_hours}}</td>
+                      <td>
+                        <a href="#" class="btn-primary btn btn-sm btn-round ms-auto"><i class="fa fa-edit"></i></a>
+                        <a href="#" class="btn-danger btn btn-sm btn-round ms-auto"><i class="fas fa-trash-alt"></i></a>
+                      </td>
+                      
+                    </tr>
+                    {% endfor %}
+                    
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}

@@ -53,4 +53,37 @@ class EmpSetup(View):
         return redirect('EmpSetup')
 
 
+#Shift Setup
+class ShiftGroupSetup(View):
+    # def get(self, request):
+    #     shift_group = ShiftGroup.objects.all()
+    #     context = {'shift_group':shift_group}
+    #     return render(request, 'HR/ShiftGroupSetup.html', context)
 
+    def post(self, request):
+        shift_group = request.POST.get('groupName')
+        working_hours = request.POST.get('workingHours')
+        # print(shift_group, working_hours)
+        ShiftGroup.objects.create(name=shift_group, working_hours=working_hours)
+        # messages.success(request, 'Shift Group Created Successfully')
+        return JsonResponse({'status':'success', 'messages':'Shift Group Created Successfully'})
+
+
+class ShiftSetup(View):
+    def get(self, request):
+        shift = Shift.objects.all()
+        shift_group = ShiftGroup.objects.all()
+        fm = ShiftForm()
+        context = {'sh':shift, 'shift_group':shift_group, 'fm':fm}
+        return render(request, 'HR/ShiftSetup.html', context)
+
+    def post(self, request):
+
+        fm = ShiftForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+            print('save....')
+            return JsonResponse({'status':'success', 'messages':'Shift Created Successfully'})
+        else:
+            print('not save....')
+            return JsonResponse({'status':'error', 'messages':'Shift Creation Failed'})

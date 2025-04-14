@@ -27,3 +27,14 @@ class EmployeeForm(forms.ModelForm):
 
 
         }
+
+class ShiftForm(forms.ModelForm):
+    class Meta:
+        model = Shift
+        fields = ['shift_group', 'start_time', 'end_time', 'working_hours']
+        widgets = {
+            'shift_group': forms.Select(attrs={'class': 'form-control col-sm-12 col-md-4'}),
+            'start_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control col-sm-12 col-md-4'}),
+            'end_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control col-sm-12 col-md-4'}),
+            'working_hours': forms.NumberInput(attrs={'class': 'form-control col-sm-12 col-md-4'}),
+        }

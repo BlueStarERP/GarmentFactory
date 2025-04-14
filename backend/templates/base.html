@@ -115,7 +115,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="{% url 'EmpSetup' %}">
+                      <a href="{% url 'ShiftSetup' %}">
                         <span class="sub-item">Shift</span>
                       </a>
                     </li>
@@ -807,6 +807,69 @@ $("#NewDptiD").on('click', '.newDetpBtn', function() {
   });//end ajax
 }); // Add New Dept
 
+
+
+//Save Shift Group
+$("#addGruopModal").on('click', '.saveGroupBtn', function() {
+  var currenttr = $(this).closest("#groupmdl");
+  var groupName = currenttr.find("input[name=gpname]").val();
+  var workingHours = currenttr.find("input[name=whour]").val();
+  // alert(groupName + workingHours);
+  $.ajax({
+    url: "{% url 'ShiftGroupSetup' %}",
+    method: "POST",
+    data:{groupName:groupName, workingHours:workingHours , csrfmiddlewaretoken: '{{ csrf_token }}'},
+    success: function(response){
+
+        alert(response.messages);
+        window.setTimeout(function(){ } ,2000);
+                        location.reload();
+
+        // window.location.href = '/admin/';
+        // window.open('https://www.codexworld.com', '_blank');
+    },
+    error:function(){
+        alert('having some error contact to developer');
+    },
+                    
+  });//end ajax
+});//shift group
+
+
+//Shift Setup
+// this is the id of the form
+$("#addShiftForm").submit(function(e) {
+
+e.preventDefault(); // avoid to execute the actual submit of the form.
+var currenttr = $(this).closest("#addShiftForm");
+var shift_group = currenttr.find("#id_shift_group").val();
+var start_time = currenttr.find("input[name=start_time]").val();
+var end_time = currenttr.find("input[name=end_time]").val();
+var working_hours = currenttr.find("input[name=working_hours]").val();
+
+// var form = $(this);
+
+// var formData = form.serialize();
+
+$.ajax({
+    type: "POST",
+    url: "{% url 'ShiftSetup' %}",
+    data: {shift_group:shift_group, start_time:start_time, end_time:end_time, working_hours:working_hours,csrfmiddlewaretoken: '{{ csrf_token }}'}, // serializes the form's elements.
+    success: function(response)
+    {
+      alert(response.messages); // show response from the php script.
+      window.setTimeout(function(){ } ,2000);
+                        location.reload();
+    },
+    error:function(){
+        alert('having some error contact to developer');
+    }
+});
+
+});
+
+
+// End Shift Setup
 
 
 

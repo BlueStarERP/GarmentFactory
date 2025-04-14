@@ -24,6 +24,8 @@ urlpatterns = [
     path('DeptSetup/', DeptSetup.as_view(), name='DeptSetup'),
     path('HRDashboard/', HRDashboard.as_view(), name='HRDashboard'),
     path('EmpSetup/', EmpSetup.as_view(), name='EmpSetup'),
+    path('ShiftSetup/', ShiftSetup.as_view(), name='ShiftSetup'),
+    path('ShiftGroupSetup/', ShiftGroupSetup.as_view(), name='ShiftGroupSetup'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
