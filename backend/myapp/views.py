@@ -87,3 +87,47 @@ class ShiftSetup(View):
         else:
             print('not save....')
             return JsonResponse({'status':'error', 'messages':'Shift Creation Failed'})
+
+
+#Sewing Line
+class SewingLineSetup(View):
+    def get(self, request):
+        line = SewingLine.objects.all()
+        fm = SewingLineForm()
+        context={'line':line, 'fm':fm}
+        return render(request, 'Sewing/SewingLineSetup.html', context)
+
+    def post(self, request):
+        fm = SewingLineForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+            return redirect('SewingLineSetup')
+
+class SewingLineStatus(View):
+    def post(self, request):
+        sewing_line = request.POST.get('lid')
+        sewing_line_obj = SewingLine.objects.get(id=sewing_line)
+        sewing_line_obj.active = not sewing_line_obj.active
+        sewing_line_obj.save()
+        return JsonResponse({'status': 'success', 'messages': 'Sewing Line Status Updated Successfully'})
+
+class LineTargetUpdate(View):
+    def post(self, request):
+        sewing_line = request.POST.get('lid')
+        target = request.POST.get('target')
+        sewing_line_obj = SewingLine.objects.get(id=sewing_line)
+        sewing_line_obj.target = target
+        sewing_line_obj.save()
+        return JsonResponse({'status': 'success', 'messages': 'Sewing Line Target Updated Successfully'})
+    
+
+
+class EmployeeSewingLineSetup(View):
+    def get(self, request,id):
+        # emp = Employee.objects.all()
+        sewing = SewingLine.objects.get(id=id)
+        emp = Employee.objects.filter(sewing_line=sewing)
+        line = SewingLine.objects.all()
+        
+        context = {'emp':emp, 'line':line}
+        return render(request, 'Sewing/EmployeeSewingLineSetup.html', context)

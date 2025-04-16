@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+
+<div class="container">
+    <div class="page-inner">
+      
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card card-round">
+            <div class="card-body">
+              <div class="card-head-row card-tools-still-right">
+                <div class="card-title">Sewing Line</div>
+  
+                <div class="card-tools">
+  
+                  <div class="dropdown">
+  
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-icon btn-clean me-0" data-bs-toggle="modal"
+                      data-bs-target="#AddLineModal">
+                      <i class="far fa-plus-square"></i>
+                    </button>
+  
+                    <!-- Modal -->
+                    <div class="modal fade" id="AddLineModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Line</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              {{fm}}
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-success">Add Sewing Line</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+  
+                  </div>
+                </div>
+              </div>
+              <div class="card-list py-4" id="SewingLineList">
+                {% for i in line %}
+                <div class="item-list sewingLine">
+                  <div class="avatar">
+                    <span class="avatar-title rounded-circle border border-white">{{i.id}}</span>
+                  </div>
+                  <div class="info-user ms-3">
+                    <input type="number" name="lid" value="{{i.id}}" hidden>
+                    <div class="username">{{i.name}}</div>
+                    <div class="status">{{i.target}}</div>
+                  </div>
+                  <a href="{% url 'EmployeeSewingLineSetup' i.id %}" class="btn btn-icon btn-link op-8 me-1">
+                    <i class="fas fa-user-friends"></i></a>
+      
+                  
+                  {% if i.active == True %}
+                  <button class="btn btn-icon btn-link btn-success op-8 statusbtn">
+                    <i class="fas fa-check"></i>
+                  </button>
+                  {% else %}
+                  <button class="btn btn-icon btn-link btn-danger op-8 statusbtn">
+                    <i class="fas fa-ban"></i>
+                  </button>
+                  {% endif %}
+                  
+  
+                </div>
+                
+                {% endfor %}
+  
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="card card-round">
+            <div class="card-header">
+              <div class="card-head-row card-tools-still-right">
+                <div class="card-title">Sewing Line Status</div>
+                <div class="card-tools">
+                  <div class="dropdown">
+                    <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton"
+                      data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-2">
+                <div class="table-responsive">
+                    <table
+                      id="multi-filter-select"
+                      class="display table table-striped table-hover"
+                    >
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Line</th>
+                          <th>Point</th>
+                          <th>Position</th>
+                          <th>Start date</th>
+                          
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Line</th>
+                            <th>Point</th>
+                            <th>Position</th>
+                            <th>Start date</th>
+                        </tr>
+                      </tfoot>
+                      <tbody>
+                        {% for i in emp %}
+                        <tr>
+                          <td>Garrett Winters</td>
+                          <td>Accountant</td>
+                          <td>Tokyo</td>
+                          <td>63</td>
+                          <td>
+                            <a href="#" class="btn btn-icon btn-link op-8 me-1"><i class="fas fa-chart-line"></i></a>
+                          </td>
+                          
+                        </tr>
+                        {% endfor %}
+                        
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+
+
+
+{% endblock content %}

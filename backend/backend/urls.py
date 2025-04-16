@@ -26,6 +26,10 @@ urlpatterns = [
     path('EmpSetup/', EmpSetup.as_view(), name='EmpSetup'),
     path('ShiftSetup/', ShiftSetup.as_view(), name='ShiftSetup'),
     path('ShiftGroupSetup/', ShiftGroupSetup.as_view(), name='ShiftGroupSetup'),
+    path('SewingLineSetup/', SewingLineSetup.as_view(), name='SewingLineSetup'),
+    path('SewingLineStatus/', SewingLineStatus.as_view(), name='SewingLineStatus'),
+    path('LineTargetUpdate/', LineTargetUpdate.as_view(), name='LineTargetUpdate'),
+    path('EmployeeSewingLineSetup/<int:id>/', EmployeeSewingLineSetup.as_view(), name='EmployeeSewingLineSetup'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

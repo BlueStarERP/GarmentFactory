@@ -38,3 +38,12 @@ class ShiftForm(forms.ModelForm):
             'end_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control col-sm-12 col-md-4'}),
             'working_hours': forms.NumberInput(attrs={'class': 'form-control col-sm-12 col-md-4'}),
         }
+
+class SewingLineForm(forms.ModelForm):
+    class Meta:
+        model = SewingLine
+        fields = ['name', 'target']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control col-sm-12 col-md-12'}),
+            'target': forms.NumberInput(attrs={'class': 'form-control col-sm-12 col-md-12'}),
+        }
